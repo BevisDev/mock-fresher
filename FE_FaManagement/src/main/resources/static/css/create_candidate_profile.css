@@ -1,0 +1,105 @@
+.main {
+	padding: 15px !important;
+}
+
+.tab-content {
+	background-color: white;
+	border-bottom: 1px solid grey;
+	border-left: 1px solid grey;
+	border-right: 1px solid grey;
+}
+
+.nav-link {
+	font-weight: 500;
+}
+
+.nav-tabs {
+	border-bottom: 1px solid grey !important;
+}
+
+.nav-item .active {
+	border-color: grey grey #fff !important;
+}
+
+.nav-item :not(.active) {
+	border-bottom: 1px solid grey !important;
+}
+
+.table-cus {
+	border: grey solid 1px;
+}
+
+.title {
+	height: 40px;
+	display: flex;
+	align-items: center;
+	background-color: rgb(114, 177, 219);
+	font-weight: 500;
+}
+
+.row-inf {
+	margin: 0 !important;
+}
+
+.row-inf>div {
+	display: flex;
+	align-items: center;
+	height: 40px;
+	border: solid 1px grey;
+}
+
+.title-cell {
+	font-weight: 500;
+	background-color: rgb(207, 207, 207);
+}
+
+.final-cell {
+	background-color: rgb(235, 235, 235);
+}
+
+.ip-date {
+	width: 100%;
+	outline: none;
+	border: none;
+}
+
+.sl-custom {
+	width: 100%;
+	outline: none;
+	border: none;
+}
+
+.ip-custom, .ta-custom {
+	width: 100%;
+	outline: none;
+	border: none;
+}
+
+.button-file {
+	outline: none;
+	border: solid 1px grey;
+	border-radius: 3px;
+}
+
+th, td {
+	border: 1px solid black !important;
+	border-collapse: collapse !important;
+}
+
+.btn-result {
+	background-color: white;
+	border: none;
+}
+
+.btn-add, .btn-remove {
+	font-size: 20px !important;
+	cursor: pointer;
+}
+
+.btn-add {
+	color: rgb(114, 177, 219);
+}
+
+.btn-remove {
+	color: red;
+}

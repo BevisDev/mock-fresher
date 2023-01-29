@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" >
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<span th:text="'Dear Mr/Ms. ' + ${masterTrainerName} +  ' and ' + ${trainerName}"></span>
+		<br>
+		<span th:text="'The class ' + ${classCode} +' - ' + ${className} +' has been assigned for you.'"></span>
+		<br>
+		<span>To view the Class details, please click <a href="#">here.</a></span>
+		<div th:include="fragments/signature_frag :: .sign"></div>
+	</div>
+</body>
+</html>

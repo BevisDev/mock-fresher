@@ -1,0 +1,31 @@
+select {
+    border-radius: 4px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#page {
+    margin-left: 100px;
+}
+
+th.title {
+    background-color: lightgray;
+}
+
+#tableAdd {
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+#tableAdd td {
+    border: 1px solid #000;
+}
+
+#tableAdd th {
+    border: 1px solid #000;
+}
+
+
+[data-toggle="toggle"] {
+    display: none;
+}

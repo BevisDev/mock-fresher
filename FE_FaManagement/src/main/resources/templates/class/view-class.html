@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View class page</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/css/create-class.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" th:href="@{/css/tab-component.css}">
+<link rel="stylesheet" th:href="@{/css/style-component.css}">
+<link rel="stylesheet" th:href="@{/css/table-data-icon-component.css}">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+<style>
+select {
+	border-radius: 4px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+#page {
+	margin-left: 100px;
+}
+
+td.title {
+	background-color: lightgray;
+}
+
+#infoTbl {
+	border-collapse: collapse;
+	border: 1px solid #000;
+}
+
+#infoTbl td {
+	border: 1px solid #000;
+}
+
+#infoTbl th {
+	border: 1px solid #000;
+}
+
+[data-toggle="toggle"] {
+	display: none;
+}
+</style>
+</head>
+
+<body>
+	<div th:include="fragments/header :: .header"></div>
+	<div class="col-12">
+		<div class="row">
+			<div th:include="fragments/menu_left :: .menu-left"></div>
+			<div class="col">
+				<input hidden="true" id="classId" th:value="${classBatch.classId}">
+				<div class="row" style="border-bottom: solid; width: 100%;">
+					<h1 class="ml-2">View class</h1>
+				</div>
+				<ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation"><a
+						class="nav-link active" id="informatin-tab" data-toggle="tab"
+						href="#information" role="tab" aria-controls="home"
+						aria-selected="true">Information</a></li>
+					<li class="nav-item" role="presentation"><a class="nav-link"
+						id="trainee-tab" data-toggle="tab" href="#trainee" role="tab"
+						aria-controls="profile" aria-selected="false">Trainee</a></li>
+				</ul>
+				<div class="tab-content" id="mytabcontent">
+					<div class="tab-pane fade show active" id="information"
+						role="tabpanel" aria-labelledby="informatin-tab">
+						<div class="tab-pane fade show active m-2" id="pane-tab-infor"
+							role="tabpanel" aria-labelledby="tab-infor">
+							<div class="col-12 p-0 table-cus mb-3">
+								<div class="col-12 title-table">
+									<label for="personal-info"><i
+										class="bi bi-caret-down-fill"></i>General</label> <input
+										type="checkbox" name="personal-info" id="personal-info"
+										data-toggle="toggle">
+								</div>
+								<div class="hide">
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-2 title-cell">Class code</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.classCode}"></div>
+											<div class="col-2 title-cell">Class name</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.className}"></div>
+											<div class="col-2 title-cell">Status</div>
+											<div class="col-2 final-cell" id="class-status"
+												th:text="${classBatch.status}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-2 title-cell">Skill *</div>
+											<div class="col-2 final-cell" th:text="${classBatch.skill}">
+											</div>
+											<div class="col-2 title-cell">Class type *</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.classBatchTypeName}"></div>
+											<div class="col-2 title-cell">Position *</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.positionName}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-2 title-cell">Planned trainee No</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.plannedTraneeNumber}"></div>
+											<div class="col-2 title-cell">Accepted trainee No</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.acceptedTraineeNumber}"></div>
+											<div class="col-2 title-cell">Actual trainee No</div>
+											<div class="col-2 final-cell"
+												th:text="${classBatch.actualTraneeNumber}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Expect start date *</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.expectedStartDate}"></div>
+											<div class="col-3 title-cell">Expect end date *</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.expectedEndDate}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Location *</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.locationName}"></div>
+											<div class="col-3 title-cell">Detail Location</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.detailLocation}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Budget Code *</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.budgetCode}"></div>
+											<div class="col-3 title-cell">Estimate Budget</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.estimateBudget}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Class Admin *</div>
+											<div class="col-3 final-cell">
+												<div>
+													<p class="mb-0"
+														th:each="admin, index : ${classBatch.classAdminNames}"
+														th:text="${admin}"></p>
+												</div>
+											</div>
+											<div class="col-3 title-cell">Weighted number</div>
+											<div class="col-3 final-cell"
+												th:text="${classBatch.weightedNumber}"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">History</div>
+											<div class="col-9 final-cell" th:text="${classBatch.history}"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 p-0 m-2 table-cus mb-3">
+							<div class="col-12 title-table">
+								<label for="detail"><i class="bi bi-caret-down-fill"></i>Detail</label>
+								<input type="checkbox" name="detail" id="detail"
+									data-toggle="toggle">
+							</div>
+							<div class="hide">
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Subject Type</div>
+										<div class="col-2 final-cell"
+											th:text="${classBatch.subjectTypeName}"></div>
+										<div class="col-2 title-cell">Sub-subject Type</div>
+										<div class="col-2 final-cell"
+											th:text="${classBatch.subSubjectTypeName}"></div>
+										<div class="col-2 title-cell">Delivery Type</div>
+										<div class="col-2 final-cell"
+											th:text="${classBatch.DeliveryTypeName}"></div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Format type</div>
+										<div class="col-2 final-cell"
+											th:text="${classBatch.formatTypeName}"></div>
+										<div class="col-2 title-cell">Scope</div>
+										<div class="col-2 final-cell"
+											th:text="${classBatch.scopeName}"></div>
+										<div class="col-2 title-cell">Supplier/Partner</div>
+										<div class="col-2 final-cell"
+											th:text="${classBatch.suppliesPartnerName}"></div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-3 title-cell">Actual start date</div>
+										<div class="col-3 final-cell"></div>
+										<div class="col-3 title-cell">Actual end date</div>
+										<div class="col-3 final-cell"></div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-3 title-cell">Master trainer</div>
+										<div class="col-3 final-cell"
+											th:text="${classBatch.masterTrainerName}"></div>
+										<div class="col-3 title-cell">Trainer</div>
+										<div class="col-3 final-cell">
+											<div>
+												<p class="mb-0"
+													th:each="trainer : ${classBatch.listOfTrainerName}"
+													th:text="${trainer}"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-3 title-cell">Curriculumn</div>
+										<div class="col-3 final-cell"
+											th:text="${classBatch.curriculum}"></div>
+										<div class="col-3 title-cell">Remarks</div>
+										<div class="col-3 final-cell" th:text="${classBatch.remarks}"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row col-12 p-0 m-2">
+								<table class="table icon-table tableAdd">
+									<thead class="labels">
+										<tr>
+											<th colspan="9" style="background-color: lightskyblue;">
+												<label for="budget"><i class="bi bi-caret-down-fill"></i>Budget</label>
+												<input type="checkbox" name="budget" id="budget"
+												data-toggle="toggle">
+											</th>
+										</tr>
+									</thead>
+									<tbody class="hide">
+										<tr>
+											<th class="title" colspan="3">Total</th>
+											<td colspan="2" class="final-cell"
+												th:text="${classBatch.totalBudget}"></td>
+											<th class="title" colspan="2">Over Budget</th>
+											<td colspan="2" class="final-cell">NO</td>
+										</tr>
+										<tr>
+											<th style="width: 12.06%;" class="title">Item</th>
+											<th style="width: 12.06%;" class="title">Unit</th>
+											<th style="width: 12.06%;" class="title">Unit Expense</th>
+											<th style="width: 12.06%;" class="title">Quantity</th>
+											<th style="width: 12.06%;" class="title">Amount</th>
+											<th style="width: 12.06%;" class="title">Tax</th>
+											<th style="width: 12.06%;" class="title">Sum</th>
+											<th style="width: 12.06%;" class="title">Note</th>
+										</tr>
+										<tr class="budget-data trData"
+											th:each="budget : ${classBatch.budgetDetailDtos}">
+											<td class="final-cell" th:text="${budget.item}"></td>
+											<td class="final-cell" th:text="${budget.unit}"></td>
+											<td class="final-cell" th:text="${budget.unitExpense}"></td>
+											<td class="final-cell" th:text="${budget.quantity}"></td>
+											<td class="final-cell" th:text="${budget.amount}"></td>
+											<td class="final-cell" th:text="${budget.tax}"></td>
+											<td class="final-cell" th:text="${budget.sum}"></td>
+											<td class="final-cell" th:text="${budget.note}"></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+
+							<div class="row col-12 p-0 m-2">
+								<table class="table icon-table tableAdd">
+									<thead class="labels">
+										<tr>
+											<th colspan="9" style="background-color: lightskyblue;"><label
+												for="audit"><i class="bi bi-caret-down-fill"></i>Audit</label>
+												<input type="checkbox" name="audit" id="audit"
+												data-toggle="toggle"></th>
+										</tr>
+									</thead>
+									<tbody class="hide">
+										<tr>
+											<th style="width: 12.06%;" class="title">Date</th>
+											<th style="width: 12.06%;" class="title">Event Category</th>
+											<th style="width: 12.06%;" class="title">Related People</th>
+											<th style="width: 12.06%;" class="title">Action</th>
+											<th style="width: 12.06%;" class="title">PIC</th>
+											<th style="width: 12.06%;" class="title">Deadline</th>
+											<th style="width: 12.06%;" class="title">Note</th>
+										</tr>
+										<tr class="trData audit-data"
+											th:each="audit : ${classBatch.auditDtos}">
+											<td class="final-cell" th:text="${audit.date}"></td>
+											<td class="final-cell" th:text="${audit.eventCategoryName}"></td>
+											<td class="final-cell"
+												th:text="${audit.relatedPartyOrPeople}"></td>
+											<td class="final-cell" th:text="${audit.action}"></td>
+											<td class="final-cell" th:text="${audit.pic}"></td>
+											<td class="final-cell" th:text="${audit.deadline}"></td>
+											<td class="final-cell" th:text="${audit.note}"></td>
+
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="mb-2">
+								<div class="row ml-2">
+									<a th:href="@{'/class/edit/' + ${classBatch.classId}}"
+										class="btn btn-outline-secondary btn-md mr-1 "> <i
+										class="bi bi-arrow-up-circle-fill" style="color: skyblue;"></i>
+										Update Class
+									</a>
+									<button class="btn btn-outline-secondary btn-md mr-1 "
+										id="btn-submit-class" onclick="submitClass()">
+										<i class="bi bi-arrow-90deg-up" style="color: orange;"></i>
+										Submit Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										data-toggle="modal" data-target="#startModal">
+										<i class="bi bi-play-fill" style="color: green;"></i> Start
+										Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										id="btn-finish-class" onclick="finishClassBatch()">
+										<i class="bi bi-dash-square-fill" style="color: yellow;"></i>
+										Finish Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1 ">
+										<i class="bi bi-arrow-up-circle-fill" style="color: skyblue;"></i>
+										Update Trainee
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										id="btn-close-class" onclick="closeClassBatch()">
+
+										<i class="bi bi-reply-fill" style="color: red;"></i> Close
+									</button>
+								</div>
+								<div class="row ml-2 mt-1">
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										id="btn-cancel-class" onclick="cancelClassBatch()">
+										<i class="bi bi-slash-circle-fill  " style="color: red;"></i>
+										Cancel Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										onclick="approveSubmittedClass()">
+										<i class="bi bi-hand-thumbs-up-fill " style="color: deeppink"></i>
+										Approve Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										onclick="rejectSubmittedClass()">
+										<i class="bi bi-hand-thumbs-down-fill"
+											style="color: rgb(190, 38, 228);"></i> Reject Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										onclick="closeClassBatch()">
+										<i class="bi bi-dash-circle-fill  " style="color: red;"></i>
+										Close Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										onclick="requestMoreInfo()">
+										<i class="bi bi-question-lg" style="color: green"></i> Request
+										Info
+									</button>
+								</div>
+								<div class="row ml-2 mt-1">
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										type="button" data-toggle="modal" data-target="#acceptModal">
+										<i class="bi bi-hand-thumbs-up"
+											style="color: rgb(190, 38, 228);"></i> Accept Class
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1"
+										data-toggle="modal" data-target="#declineModal">
+										<i class="bi bi-hand-thumbs-down" style="color: green"></i>
+										Decline Class
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="trainee" role="tabpanel"
+						aria-labelledby="trainee-tab">
+						<div class="m-2">
+							<div class="row m-auto">
+								<h4>Trainee Listing</h4>
+							</div>
+							<div class="row m-auto">
+								<table class="table table-striped " border="1" id="traineeTbl"
+									cellspacing="0" width="100%">
+									<thead style="background-color: lightgray;">
+										<tr>
+											<th class="th-sm"><input type="checkbox" /></th>
+											<th class="th-sm">Empl ID</th>
+											<th class="th-sm">Name</th>
+											<th class="sorting_asc">DOB</th>
+											<th class="sorting_asc">Gender</th>
+											<th class="sorting_asc">University</th>
+											<th class="sorting_asc">Faculty</th>
+											<th class="sorting_asc">Phone</th>
+											<th class="sorting_asc">Email</th>
+											<th class="sorting_asc">Status</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="trainee : ${trainees.content}">
+											<td><input type="checkbox" name="trainee"
+												th:value="${trainee.id}" id=" "></td>
+											<td th:text="${trainee.id}" name="traineeId"></td>
+											<td th:text="${trainee.fullName}" name="fullName"></td>
+											<td th:text="${trainee.dateOfBirth}"></td>
+											<td th:text="${trainee.gender}"></td>
+											<td th:text="${trainee.universityName}"></td>
+											<td th:text="${trainee.facultyName}"></td>
+											<td th:text="${trainee.phone}"></td>
+											<td th:text="${trainee.email}"></td>
+											<td th:text="${trainee.status}"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="row ml-sm-1 mb-0">
+									<div class="dataTable_length" id="length">
+										<label>Page size</label> <select id="pageSize"
+											class="ml-2 length">
+											<option value="10">10</option>
+											<option value="20">20</option>
+											<option value="30">30</option>
+											<option value="50">50</option>
+											<option value="100">100</option>
+										</select>
+									</div>
+									<div class="dataTables_info ml-lg-5 pl-lg-3" id="info"
+										aria-live="polite"
+										th:text="'Showing '+  ${trainees.numberOfElements}  +' of ' +${trainees.totalElements} + ' entities '">
+									</div>
+									<div class="dataTable_page" id="page">
+										<select class="ml-2 page">
+											<option
+												th:each="i: ${#numbers.sequence(0, trainees.totalPages - 1)}"
+												th:text="${i+1}+'/'+${trainees.totalPages}"></option>
+										</select>
+									</div>
+								</div>
+								<nav aria-label="Page navigation example" class="ml-auto">
+									<ul class="pagination">
+
+										<li class="page-item"
+											th:each="i: ${#numbers.sequence(0, trainees.totalPages - 1)}"><button
+												class="page-link" style="color: black;" th:text="${i+1}"
+												th:attr="onclick=|page(this,${i},${classBatch.classId})|"></button></li>
+										<li class="page-item"
+											th:attr="onclick=|page(this,${trainees.number + 1},${classBatch.classId})|">
+											<button class="page-link" style="color: black;">>></button>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="mb-2">
+								<div class="row ml-2">
+									<button id="btnImportTrainee"
+										class="btn btn-outline-secondary btn-md mr-1 ">
+										<i class="bi bi-box-arrow-up" style="color: blue;"></i> Import
+										Trainee
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1 "
+										data-toggle="modal" data-target="#addTraineeModal">
+										<i class="bi bi-person-plus-fill" style="color: green;"></i>
+										Add Trainee
+									</button>
+									<button class="btn btn-outline-secondary btn-md mr-1 "
+										onclick="removeTrainee()">
+										<i class="bi bi-person-x-fill" style="color: red;"></i> Remove
+										Trainee
+									</button>
+									<div class="btn-group dropright">
+										<button type="button"
+											class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+											data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false">
+											<i class="bi bi-pencil-fill">Update Trainee</i>
+										</button>
+										<div class="dropdown-menu" style="width: 120%; border: none;">
+											<button class="btn btn-outline-secondary btn-md col-12"
+												style="text-align: left;" id="changeStatus">
+												<i class="bi bi-record"></i> Status
+											</button>
+											<button class="btn btn-outline-secondary btn-md col-12"
+												style="text-align: left;">
+												<i class="bi bi-check-lg" style="color: green;"></i>
+												Attendance Status
+											</button>
+											<button class="btn btn-outline-secondary btn-md col-12"
+												style="text-align: left;">
+												<i class="bi bi-star-fill" style="color: blue;"></i> Topic
+												Mark
+											</button>
+											<button class="btn btn-outline-secondary btn-md col-12"
+												style="text-align: left;">
+												<i class="bi bi-trophy-fill" style="color: yellow;"></i>
+												Reward & Penalty
+											</button>
+											<button class="btn btn-outline-secondary btn-md col-12"
+												style="text-align: left;">
+												<i class="bi bi-geo-alt-fill" style="color: skyblue;"></i>
+												Allocation
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Add trainee modal -->
+				<div class="modal fade" id="addTraineeModal" tabindex="-1"
+					aria-labelledby="addTraineeModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-xl">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="addTraineeModalLabel">Add
+									Trainee</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="row mb-3">
+									<div class="col-5">
+										<div class="form-inline">
+											<label for="name" class="mr-2">Name</label> <input
+												class="form-control" id="name" type="text">
+										</div>
+									</div>
+									<div class="col-5">
+										<div class="form-inline">
+											<label for="dob" class="mr-2">DOB</label> <input
+												class="form-control" id="dob" type="date">
+										</div>
+									</div>
+									<div class="col-2">
+										<button class="btn btn-outline-secondary">Search</button>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-5">
+										<div class="form-inline">
+											<label for="phone" class="mr-2">Phone</label> <input
+												type="text" name="phone" id="phone" class="form-control">
+										</div>
+									</div>
+									<div class="col-5">
+										<div class="form-inline">
+											<label for="email" class="mr-2">Email</label> <input
+												type="email" name="email" id="email" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row m-auto">
+									<table class="table table-striped " border="1"
+										id="traineeNotInClassTbl" cellspacing="0" width="100%">
+										<thead style="background-color: lightgray;" border="1">
+											<tr>
+												<th class="th-sm"><input type="checkbox" /></th>
+												<th class="th-sm">#</th>
+												<th class="th-sm">Empl ID</th>
+												<th class="sorting_asc">Name</th>
+												<th class="th-sm">DOB</th>
+												<th class="th-sm">Gender</th>
+												<th class="th-sm">University</th>
+												<th class="th-sm">Faculty</th>
+												<th class="th-sm">Phone</th>
+												<th class="th-sm">Email</th>
+												<th class="th-sm">Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr
+												th:each=" traineeNotIn,isStart : ${traineesNotIn.content}">
+												<td><input type="checkbox" name="traineeNotIn"
+													th:value="${traineeNotIn.id}" id=" "></td>
+												<td th:th:text="${isStart.index} + 1"></td>
+												<td th:text="${traineeNotIn.id}"></td>
+												<td th:text="${traineeNotIn.fullName}"></td>
+												<td th:text="${traineeNotIn.dateOfBirth}"></td>
+												<td th:text="${traineeNotIn.gender}"></td>
+												<td th:text="${traineeNotIn.universityName}"></td>
+												<td th:text="${traineeNotIn.facultyName}"></td>
+												<td th:text="${traineeNotIn.phone}"></td>
+												<td th:text="${traineeNotIn.email}"></td>
+												<td th:text="${traineeNotIn.status}"></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="row ml-sm-1 mb-0">
+										<div class="dataTable_length" id="length">
+											<label>Page size</label> <select class="ml-2 length">
+												<option value="10">10</option>
+												<option value="20">20</option>
+												<option value="30">30</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+										</div>
+										<div class="dataTables_info ml-lg-5 pl-lg-3" id="info"
+											aria-live="polite"
+											th:text="'Showing '+  ${traineesNotIn.numberOfElements}  +' of ' +${traineesNotIn.totalElements} + ' entities '">
+										</div>
+										<div class="dataTable_page" id="page">
+											<select class="ml-2 page">
+												<option
+													th:each="i: ${#numbers.sequence(0, traineesNotIn.totalPages - 1)}"
+													th:text="${i+1}+'/'+${traineesNotIn.totalPages}"></option>
+											</select>
+										</div>
+									</div>
+									<nav aria-label="Page navigation example" class="ml-auto">
+										<ul class="pagination">
+
+											<li class="page-item"
+												th:each="i: ${#numbers.sequence(0, traineesNotIn.totalPages - 1)}"><button
+													class="page-link" style="color: black;" th:text="${i+1}"
+													th:attr="onclick=|pageTraineeNotInClass(this,${i},${classBatch.classId})|"></button>
+											</li>
+											<li class="page-item"
+												th:attr="onclick=|pageTraineeNotInClass(this,${traineesNotIn.number + 1},${classBatch.classId})|">
+												<button class="page-link" style="color: black;">>></button>
+											</li>
+										</ul>
+									</nav>
+								</div>
+								<div class="row ml-sm-1 mt-0">
+									<button onclick="addTraineeToClass()"
+										class="btn btn-outline-secondary btn-md mr-1 ">
+										<i class="bi bi-person-plus-fill" style="color: green;"></i>
+										Add Trainee
+									</button>
+								</div>
+							</div>
+							<div class="modal-footer"></div>
+						</div>
+					</div>
+				</div>
+				<!-- /Add trainee modal -->
+
+				<div class="modal fade" id="confirmModal" tabindex="-1"
+					aria-labelledby="confirmModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<label class="modal-title" id="confirmModalLabel">Confirm</label>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body m-auto">
+								<div class="row">
+									<label id="modal-title"> <i
+										class="bi bi-question-circle-fill" style="color: green;"></i>
+										Are you sure to request?
+									</label>
+								</div>
+								<div class="row">
+									<button type="submit" id="btn-ok"
+										class="btn btn-outline-secondary ml-2" data-dismiss="modal">OK</button>
+									<button type="button" id="btn-cancel"
+										class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+							<div class="modal-footer"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="reasonModal" tabindex="-1"
+					aria-labelledby="confirmModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<label class="modal-title" id="confirmModalLabel">Reason</label>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body m-auto">
+								<div class="row">
+									<label id="modal-title"> <i
+										class="bi bi-question-circle-fill" style="color: orange;"></i>
+										Please input reason here
+									</label>
+								</div>
+								<div class="row">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend mr-2">
+											<span>Remarks</span>
+										</div>
+										<input type="text" id="request-remarks" class="form-control"
+											aria-label="Default"
+											aria-describedby="inputGroup-sizing-default">
+									</div>
+								</div>
+								<div class="row">
+									<button type="submit" id="btn-ok" onclick="reasonInputHandle()"
+										class="btn btn-outline-secondary ml-2">OK</button>
+									<button type="button" id="btn-cancel"
+										class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+							<div class="modal-footer"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="requestModal" tabindex="-1"
+				aria-labelledby="requestModal" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Reason</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto">
+							<div class="row">
+								<label id="modal-title"> <i
+									class="bi bi-question-circle-fill" style="color: orange;"></i>
+									Please input reason here
+								</label>
+							</div>
+							<div class="row">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend mr-2">
+										<span>Remarks</span>
+									</div>
+									<input type="text" id="request-remarks" class="form-control"
+										aria-label="Default"
+										aria-describedby="inputGroup-sizing-default">
+								</div>
+							</div>
+							<div class="row">
+								<button type="submit" id="send-request" onclick="sendRequest()"
+									class="btn btn-outline-secondary ml-2">OK</button>
+								<button type="button" id="btn-cancel"
+									class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="modal fade changeStatusModal" id="changeStatusModal"
+				tabindex="-1" aria-labelledby="changeStatusModal" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Update
+								Status in class</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto col-12">
+							<div class="row">
+								<div class="tab-pane fade show active m-2 col-12"
+									id="pane-tab-infor" role="tabpanel" aria-labelledby="tab-infor">
+									<div class="col-12 p-0 table-cus mb-3">
+										<div class="col-12 title-table">
+											<label for="personal-info">Status in Class</label> <input
+												type="checkbox" name="personal-info" id="personal-info"
+												data-toggle="toggle">
+										</div>
+										<div class="hide">
+											<div class="col-12 p-0">
+												<div class="row row-inf">
+													<div class="col-3 title-cell">Empl ID</div>
+													<div class="col-6 title-cell">Name</div>
+													<div class="col-3 title-cell">Status</div>
+												</div>
+											</div>
+											<div class="col-12 p-0" id="table-status">
+												<div class="row row-inf">
+													<div class="col-3 final-cell traineeId">ID</div>
+													<div class="col-6 final-cell traineeName">Name</div>
+													<div class="col-3">
+														<select name="statusInClass">
+															<option value="Active">Active</option>
+															<option value="Deferred">Deferred</option>
+															<option value="Drop-out">Drop-out</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<button type="button" id="update-status"
+									onclick="updateStatus()" class="btn btn-primary ml-2">Submit</button>
+
+								<button type="button" id="btn-cancel"
+									class="btn btn-outline-secondary ml-2" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade importTrainee" id="importTraineeModal"
+				tabindex="-1" aria-labelledby="importTraineeModal"
+				aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Import
+								trainee</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto col-12">
+							<div class="row">
+								<div class="tab-pane fade show active m-2 col-12"
+									id="pane-tab-infor" role="tabpanel" aria-labelledby="tab-infor">
+									<div class="mx-2"
+										style="width: 96%; height: 300px; border: solid 2px;">
+										<input type="file" id="importTraineeFile"
+											style="position: absolute; left: 40%; top: 40%;"
+											accept=".xls,.xlsx">
+									</div>
+								</div>
+							</div>
+							<div class="row ml-2">
+								<button type="button" id="import-trainee"
+									onclick="importTrainee()" class="btn btn-primary ml-2">Submit</button>
+								<button type="button" id="btn-cancel"
+									class="btn btn-outline-secondary ml-2" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="acceptModal" tabindex="-1"
+				aria-labelledby="confirmModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Confirm</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto">
+							<div class="row">
+								<label> <i class="bi bi-question-circle-fill"
+									style="color: green;"></i> Are you sure to accept?
+								</label>
+							</div>
+							<div class="row">
+								<button type="button" id="btn-ok"
+									class="btn btn-outline-secondary ml-2"
+									th:attr="onclick=|clickOKAccept(${classBatch.classId})|">OK</button>
+								<button type="button" id="btn-cancel"
+									class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="startModal" tabindex="-1"
+				aria-labelledby="confirmModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Confirm</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto">
+							<div class="row">
+								<label> <i class="bi bi-question-circle-fill"
+									style="color: green;"></i> Are you sure to start?
+								</label>
+							</div>
+							<div class="row">
+								<button type="button" id="btn-ok"
+									class="btn btn-outline-secondary ml-2"
+									th:attr="onclick=|clickOKStart(${classBatch.classId})|">OK</button>
+								<button type="button" id="btn-cancel"
+									class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="declineModal" tabindex="-1"
+				aria-labelledby="confirmModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Confirm</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto">
+							<div class="row">
+								<label> <i class="bi bi-question-circle-fill"
+									style="color: green;"></i> Are you sure to decline?
+								</label>
+							</div>
+							<div class="row">
+								<button type="button" id="btn-ok"
+									class="btn btn-outline-secondary ml-2" data-toggle="modal"
+									data-target="#declineRemarksModal" data-dismiss="modal">OK</button>
+								<button type="button" id="btn-cancel"
+									class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="declineRemarksModal" tabindex="-1"
+				aria-labelledby="confirmModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Reason</label>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form
+							th:action="@{/class/decline?classId=} + ${classBatch.classId}"
+							method="post">
+							<div class="modal-body m-auto">
+								<div class="form-group">
+									<label> <i class="bi bi-info-circle-fill"
+										style="color: #FFD700;"></i> Please input reason here
+									</label>
+								</div>
+								<div class="form-group">
+									<label for="exampleFormControlTextarea1">Remarks</label>
+									<textarea class="form-control" id="remarks" rows="3"
+										name="remarks"></textarea>
+								</div>
+								<div class="form-group">
+									<button type="submit" id="btn-ok"
+										class="btn btn-outline-secondary ml-2">OK</button>
+									<button type="button" id="btn-cancel"
+										class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+						</form>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input hidden="true" th:value="${message}" id="message">
+	</div>
+	<!--footer-->
+
+	<div th:include="fragments/footer :: .footer"></div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+	<script
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+	<script type="text/javascript" th:src="@{/js/tab.js}"></script>
+
+	<script type="text/javascript" th:src="@{/js/view-class.js}"></script>
+
+</body>
+
+</html>

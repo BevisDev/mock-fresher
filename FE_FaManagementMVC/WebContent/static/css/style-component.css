@@ -1,0 +1,48 @@
+select {
+    width: 185px;
+}
+
+datalist {
+    display: none;
+}
+
+option {
+    padding: 3px;
+}
+
+option:hover {
+    background-color: #cccc;
+}
+
+.dropdowninput::-webkit-calendar-picker-indicator {
+    display: none;
+}
+/* Table border component */
+    select {
+        border-radius: 4px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    #page {
+        margin-left: 100px;
+    }
+
+    td.title {
+        background-color: lightgray;
+    }
+
+    #infoTbl {
+        border-collapse: collapse;
+        border: 1px solid #000;
+    }
+
+    #infoTbl td {
+        border: 1px solid #000;
+    }
+
+    #infoTbl th {
+        border: 1px solid #000;
+    }
+
+/*  */

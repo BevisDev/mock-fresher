@@ -1,0 +1,25 @@
+.tab-content {
+    background-color: white;
+    border-bottom: 1px solid grey;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+  }
+  .nav-link {
+    font-weight: 500;
+  }
+  
+  .nav-tabs {
+    border-bottom: 1px solid grey !important;
+  }
+  
+  .nav-item .active {
+    border-color: grey grey #fff !important;
+  }
+  
+  .nav-item :not(.active) {
+    border-bottom: 1px solid grey !important;
+  }
+
+  .nav-item a{
+    color: black;
+  }

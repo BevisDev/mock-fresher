@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+<table class="table table-striped " border="1" id="traineeNotInClassTbl"
+	cellspacing="0" width="100%">
+	<thead style="background-color: lightgray;">
+		<tr>
+			<th class="th-sm"><input type="checkbox" /></th>
+			<th class="th-sm">#</th>
+			<th class="th-sm">Empl ID</th>
+			<th class="th-sm">Name</th>
+			<th class="sorting_asc">DOB</th>
+			<th class="sorting_asc">Gender</th>
+			<th class="sorting_asc">University</th>
+			<th class="sorting_asc">Faculty</th>
+			<th class="sorting_asc">Phone</th>
+			<th class="sorting_asc">Email</th>
+			<th class="sorting_asc">Status</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="trainee, isStart : ${traineesNotIn.content}">
+			<td><input type="checkbox" name="trainee" th:value="${trainee.id}" id=" "></td>
+			<td th:text="${isStart.index} + 1"></td>
+			<td th:text="${trainee.id}"></td>
+			<td th:text="${trainee.fullName}"></td>
+			<td th:text="${trainee.dateOfBirth}"></td>
+			<td th:text="${trainee.gender}"></td>
+			<td th:text="${trainee.universityName}"></td>
+			<td th:text="${trainee.facultyName}"></td>
+			<td th:text="${trainee.phone}"></td>
+			<td th:text="${trainee.email}"></td>
+			<td th:text="${trainee.status}"></td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,35 @@
+<div class="row m-auto">
+	<table class="table table-striped " border="1" id="classTbl"
+		cellspacing="0" width="100%">
+		<thead style="background-color: lightgray;">
+			<tr>
+				<th class="th-sm"><input type="checkbox" value="0"
+					id="checkAll" class="id-cb" /></th>
+				<th class="th-sm">#</th>
+				<th class="th-sm">Class Code</th>
+				<th class="th-sm">Class Name</th>
+				<th class="th-sm">Actual Start Date</th>
+				<th class="th-sm">Actual End Date</th>
+				<th class="th-sm">Location</th>
+				<th class="th-sm">Status <a href="#"
+					style="color: black; text-align: right;"><i
+						class="bi bi-funnel-fill "></i></a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="class, state : ${listOfClasses}" id="tbl-info">
+				<td><input type="checkbox" th:value="${class.classId}"
+					class="id-cb" name="classId"></td>
+				<td th:text="${state.count} + (${currentPage} - 1) * ${sizeOfPage} "></td>
+				<td><a th:href="@{/class/view/{id}(id=${class.classId})}"
+					th:text="${class.classCode}"></a></td>
+				<td th:text="${class.className}" />
+				<td th:text="${class.actualStartDate}" />
+				<td th:text="${class.actualEndDate}" />
+				<td th:text="${class.detailLocation}" />
+				<td th:text="${class.status}" />
+			</tr>
+		</tbody>
+	</table>
+</div>

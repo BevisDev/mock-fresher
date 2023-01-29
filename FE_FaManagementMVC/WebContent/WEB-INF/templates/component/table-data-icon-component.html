@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="/src/main/resources/static/css/table-data-icon-component.css">
+</head>
+
+<body class="container-fluid">
+	<div class="row m-2">
+		<table class="table icon-table tableAdd">
+			<thead class="labels">
+				<tr>
+					<th colspan="9" style="background-color: lightskyblue;"><label
+						for="audit"><i class="bi bi-caret-down-fill"></i>Audit</label> <input
+						type="checkbox" name="audit" id="audit" data-toggle="toggle">
+					</th>
+				</tr>
+			</thead>
+			<tbody class="hide">
+				<tr>
+					<th class="title" colspan="3">Total</th>
+					<td colspan="2"></td>
+					<th class="title" colspan="2">Over Budget</th>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<th style="width: 3.5%;">
+						<button class="btn addBtn" id="addAudit">
+							<i class="bi bi-plus-circle-fill" style="color: skyblue;"></i>
+						</button>
+					</th>
+					<th style="width: 12.06%;" class="title">Item</th>
+					<th style="width: 12.06%;" class="title">Unit</th>
+					<th style="width: 12.06%;" class="title">Unit Expense</th>
+					<th style="width: 12.06%;" class="title">Quantity</th>
+					<th style="width: 12.06%;" class="title">Amount</th>
+					<th style="width: 12.06%;" class="title">Tax</th>
+					<th style="width: 12.06%;" class="title">Sum</th>
+					<th style="width: 12.06%;" class="title">Note</th>
+				</tr>
+				<tr class="trData">
+					<td>
+						<button class="btn deleteBtn" onclick="deleteRow(this)"
+							id="deleteBtn">
+							<i class="bi bi-trash3-fill" style="color: red;"></i>
+						</button>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script
+		src="/src/main/resources/static/js/table-data-icon-component.js"></script>
+</body>
+
+</html>

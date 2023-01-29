@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/style-component.css">
+    <style>
+        select {
+            border-radius: 4px;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        #page {
+            margin-left: 100px;
+        }
+
+        td.title {
+            background-color: lightgray;
+        }
+
+        #infoTbl {
+            border-collapse: collapse;
+            border: 1px solid #000;
+        }
+
+        #infoTbl td {
+            border: 1px solid #000;
+        }
+
+        #infoTbl th {
+            border: 1px solid #000;
+        }
+
+
+        [data-toggle="toggle"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <div class="row m-auto">
+        <table class="table " id="infoTbl">
+            <tbody>
+            <tbody class="labels">
+                <tr>
+                    <td colspan="8" style="background-color: lightskyblue;">
+                        <label for="personal-info"><i class="bi bi-caret-down-fill"></i>Personal Info</label>
+                        <input type="checkbox" name="personal-info" id="personal-info" data-toggle="toggle">
+                    </td>
+                </tr>
+            </tbody>
+            <tbody class="hide">
+                <tr>
+                    <td class="title">Empl ID</td>
+                    <td>00126792</td>
+                    <td class="title">Type</td>
+                    <td>Trainee</td>
+                    <td class="title">Status</td>
+                    <td>Waiting for Class</td>
+                    <td class="title">Allocation Status</td>
+                    <td>Not allocated</td>
+                </tr>
+                <tr>
+                    <td class="title">Account</td>
+                    <td colspan="3">AnhDD3</td>
+                    <td class="title">Name</td>
+                    <td colspan="3">Đào Đức Anh</td>
+                </tr>
+                <tr>
+                    <td class="title">Gender</td>
+                    <td colspan="3">Male</td>
+                    <td class="title">DOB</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="title">University</td>
+                    <td colspan="3"></td>
+                    <td class="title">Faculty</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="title">Phone</td>
+                    <td colspan="3"></td>
+                    <td class="title">Email</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="title">Salary Paid</td>
+                    <td colspan="3"></td>
+                    <td class="title">TPB Account</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="title">Allowance Group</td>
+                    <td colspan="3"></td>
+                    <td class="title">Commitment</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="title">History</td>
+                    <td colspan="7"></td>
+                </tr>
+            </tbody>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="toggle"]').change(function () {
+                $(this).parent().insertAfter('.tr')
+                $(this).parents().next('.hide').toggle();
+            });
+        });
+    </script>
+</body>
+
+</html>

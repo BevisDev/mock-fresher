@@ -1,0 +1,99 @@
+<div class="row m-auto">
+	<table class="table table-striped " border="1" id="classTbl"
+		cellspacing="0" width="100%">
+		<thead style="background-color: lightgray;">
+			<tr>
+				<th class="th-sm"><input type="checkbox" value="0"
+					id="checkAll" class="id-cb" /></th>
+				<th class="th-sm">#</th>
+				<th class="th-sm">Class Code</th>
+				<th class="th-sm">Class Name</th>
+				<th class="th-sm">Actual Start Date</th>
+				<th class="th-sm">Actual End Date</th>
+				<th class="th-sm">Location</th>
+				<th class="th-sm">Status <a href="#"
+					style="color: black; text-align: right;"><i
+						class="bi bi-funnel-fill "></i></a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<input type="hidden" id="searchedList" th:value="${listOfClasses}">
+			<tr th:each="class, state : ${listOfClasses}" id="tbl-info">
+				<td><input type="checkbox" th:value="${class.classId}"
+					class="id-cb" name="classId"></td>
+				<td th:text="${state.count} + (${currentPage} - 1) * ${sizeOfPage} "></td>
+				<td><a th:href="@{/class/view/{id}(id=${class.classId})}"
+					th:text="${class.classCode}"></a></td>
+				<td th:text="${class.className}" />
+				<td th:text="${class.actualStartDate}" />
+				<td th:text="${class.actualEndDate}" />
+				<td th:text="${class.detailLocation}" />
+				<td th:text="${class.status}" />
+			</tr>
+		</tbody>
+	</table>
+	<div class="row ml-sm-1 mb-0">
+		<div class="dataTable_length paginationForm" id="length">
+			<label>Page size</label> <select class="ml-2 length"
+				style="width: fit-content">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</div>
+		<div class="dataTables_info ml-lg-5 pl-lg-3" id="info"
+			aria-live="polite">
+			<span th:if="${totalItems} >1 "
+				th:text="'Show '  + (1 + (${currentPage}-1) * ${sizeOfPage}) + '-' + (${listOfClasses.size()} + (${currentPage}-1) * ${sizeOfPage}) + ' of total ' + ${allItems} + ' items'"></span>
+			<span th:unless="${totalItems} > 1"
+				th:text="'Show '  + (1 + (${currentPage}-1) * ${sizeOfPage}) + ' of total ' + ${allItems} + ' items'"></span>
+		</div>
+		<div class="dataTable_page paginationForm" id="page">
+			<select class="ml-2 page" style="width: fit-content">
+				<option th:each="i: ${#numbers.sequence(1,totalPages)}" value="${i}"
+					th:text="'Page ' +  ${i} + '/' + ${totalPages}"></option>
+			</select>
+		</div>
+	</div>
+	<!-- 	@{'?pageNum=' + ${currentPage -1} + '&pageSize=' + ${sizeOfPage}} -->
+	<!-- 	@{'?pageNum=' + ${i} + '&pageSize=' + ${sizeOfPage}} -->
+	<!--	@{'?pageNum=' + ${currentPage + 1} + '&pageSize=' + ${sizeOfPage}} -->
+	<nav aria-label="Page navigation example" class="ml-auto">
+		<ul class="pagination">
+			<li class="page-item"><a class="page-link" style="color: black;"
+				th:if="${currentPage > 1}"
+				th:onclick="changePage([[${currentPage -1} ]] , [[${sizeOfPage}]] , [[${researchData}]])"
+				th:text="'<<'"></a> <a class="page-link disabled"
+				style="color: black;" th:unless="${currentPage > 1}" th:text="'<<'"></a></li>
+
+			<li class="page-item"
+				th:each="i: ${#numbers.sequence(1, totalPages)}"><a
+				class="page-link" style="color: black;" th:if="${currentPage != i}"
+				th:onclick="changePage([[ ${i} ]]  , [[${sizeOfPage} ]], [[${researchData}]] )"
+				th:text=${i}></a> <a
+				class="page-link disabled bg-secondary text-light"
+				style="width: fit-content" th:unless="${currentPage != i}"
+				th:text=${i}></a></li>
+
+			<li class="page-item"><a class="page-link" style="color: black;"
+				th:if="${currentPage < totalPages}"
+				th:onclick="changePage([[${currentPage + 1}]] , [[${sizeOfPage}]], [[${researchData}]])"
+				th:text="'>>'"></a> <a class="page-link disabled"
+				style="color: black;" th:unless="${currentPage < totalPages}"
+				th:text="'>>'"></a></li>
+		</ul>
+	</nav>
+</div>
+
+<div class="row ml-sm-1 mt-0">
+	<a href="/class/add" class="btn btn-outline-success btn-sm ml-2"
+		id="btn-new"><i class="bi bi-plus-circle-fill"></i> New Class</a> <a
+		href="" class="btn btn-outline-primary btn-sm ml-2"><i
+		class="bi bi-arrow-up-circle-fill "></i> Update Class</a> <a href=""
+		class="btn btn-outline-danger btn-sm ml-2"><i
+		class="bi bi-x-circle-fill"></i> Cancel Class</a>
+</div>
+

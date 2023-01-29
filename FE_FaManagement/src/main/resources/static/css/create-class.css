@@ -1,0 +1,89 @@
+table, tr, td, th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+tr.header {
+	cursor: pointer;
+	background-color: rgb(149, 188, 242);
+}
+
+td.table-label {
+	background-color: rgb(204, 204, 204);
+}
+
+input {
+	border: none;
+	display: inline-block;
+	width:100%;
+}
+
+th {
+	background-color: rgb(204, 204, 204);
+}
+
+select{
+	border:none;
+}
+
+.table-cus {
+  border: grey solid 1px;
+}
+
+.title-table {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(114, 177, 219);
+  font-weight: 500;
+}
+
+.row-inf {
+  margin: 0 !important;
+}
+
+.row-inf > div {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  border: solid 1px grey;
+}
+
+.title-cell {
+  font-weight: 500;
+  background-color: rgb(207, 207, 207);
+}
+
+.final-cell {
+  background-color: rgb(235, 235, 235);
+}
+
+.ip-date {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.sl-custom {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.ip-custom,
+.ta-custom {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.button-file {
+  outline: none;
+  border: solid 1px grey;
+  border-radius: 3px;
+}
+
+.error{
+	color:red;
+}
+

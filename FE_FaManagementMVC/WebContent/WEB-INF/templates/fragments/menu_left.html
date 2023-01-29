@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="menu_left" class="menu-left">
+		<div th:if="${session.userLogin != null}" class="col"
+			style="background-color: rgb(235, 235, 235); height: 100%; border-right: black solid 1px; padding-left: 15px">
+			<div class="col-12  p-0 pb-4 pt-5">
+				<div>
+					<span>Your role now is:</span>
+				</div>
+				<input type="text" disabled
+					th:value="${session?.userLogin?.roleDesc}">
+			</div>
+			<ul style="padding-left: 18px; font-size: 15px; font-weight: 500;">
+				<a href="">
+					<li class="mb-2">Dashboard</li>
+				</a>
+				<a href="http://localhost:8080/FE_FaManagementMVC/class">
+					<li class="mb-2">Class Management</li>
+				</a>
+				<a th:href="@/Fe_FaManagementMVC/candidate/list">
+					<li class="mb-2">Candidate Management</li>
+				</a>
+				<a href="">
+					<li class="mb-2">Trainer Management</li>
+				</a>
+				<a href="http://localhost:8080/Fe_FaManagementMVC/trainee">
+					<li class="mb-2">Trainee Management</li>
+				</a>
+				<a href="">
+					<li>General Setting</li>
+				</a>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

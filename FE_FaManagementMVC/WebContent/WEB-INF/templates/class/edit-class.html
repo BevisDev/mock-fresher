@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit class page</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/static/css/create-class.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" th:href="@{/static/css/tab-component.css}">
+<link rel="stylesheet" th:href="@{/static/css/style-component.css}">
+<link rel="stylesheet" th:href="@{/static/css/table-data-icon-component.css}">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+<style>
+select {
+	border-radius: 4px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+#page {
+	margin-left: 100px;
+}
+
+td.title {
+	background-color: lightgray;
+}
+
+#infoTbl {
+	border-collapse: collapse;
+	border: 1px solid #000;
+}
+
+#infoTbl td {
+	border: 1px solid #000;
+}
+
+#infoTbl th {
+	border: 1px solid #000;
+}
+
+[data-toggle="toggle"] {
+	display: none;
+}
+</style>
+</head>
+
+<body>
+	<div th:include="fragments/header :: .header"></div>
+	<div class="col-12">
+		<div class="row">
+			<div th:include="fragments/menu_left :: .menu-left"></div>
+			<div class="col">
+				<form id="editClass" th:action="@{/class/edit}" method="post"
+					th:object="${classBatch}">
+					<input hidden="true" readonly th:field=*{classId}>
+					<div class="row" style="border-bottom: solid; width: 100%;">
+						<h1 class="ml-2">Create class</h1>
+					</div>
+					<ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation"><a
+							class="nav-link active" id="informatin-tab" data-toggle="tab"
+							href="#information" role="tab" aria-controls="home"
+							aria-selected="true">Information</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="trainee-tab" data-toggle="tab" href="#trainee" role="tab"
+							aria-controls="profile" aria-selected="false">Trainee</a></li>
+					</ul>
+					<div class="tab-content" id="mytabcontent">
+						<div class="tab-pane fade show active" id="information"
+							role="tabpanel" aria-labelledby="informatin-tab">
+							<div class="tab-pane fade show active m-2" id="pane-tab-infor"
+								role="tabpanel" aria-labelledby="tab-infor">
+								<div class="col-12 p-0 table-cus mb-3">
+									<div class="col-12 title-table">
+										<label for="personal-info"><i
+											class="bi bi-caret-down-fill"></i>General</label> <input
+											type="checkbox" name="personal-info" id="personal-info"
+											data-toggle="toggle">
+									</div>
+									<div class="hide">
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-2 title-cell">Class code</div>
+												<div class="col-2 final-cell"
+													th:text="${classBatch.classCode}">
+													<input hidden="true" readonly th:field="*{classCode}">
+												</div>
+												<div class="col-2 title-cell">Class name</div>
+												<div class="col-2 final-cell"
+													th:text="${classBatch.className}">
+													<input readonly hidden="true" th:field="*{className}">
+												</div>
+												<div class="col-2 title-cell">Status</div>
+												<div class="col-2 final-cell" th:text="${classBatch.status}">
+													<input hidden="true" readonly th:field="*{status}">
+												</div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-2 title-cell">Skill *</div>
+												<div class="col-2 final-cell" th:text="${classBatch.skill}">
+													<input hidden="true" th:field="*{skill}" readonly>
+												</div>
+												<div class="col-2 title-cell">Class type *</div>
+												<div class="col-2 final-cell"
+													th:text="${classBatch.classBatchTypeName}">
+													<input hidden="true" readonly th:field="*{classTypeId}">
+												</div>
+												<div class="col-2 title-cell">Position *</div>
+												<div class="col-2 final-cell"
+													th:text="${classBatch.positionName}">
+													<input hidden="true" readonly th:field="*{positionId}">
+												</div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-2 title-cell">Planned trainee No</div>
+												<div class="col-2">
+													<input th:field="*{plannedTraneeNumber}">
+												</div>
+												<div class="col-2 title-cell">Accepted trainee No</div>
+												<div class="col-2 final-cell"></div>
+												<div class="col-2 title-cell">Actual trainee No</div>
+												<div class="col-2 final-cell"></div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-3 title-cell">Expect start date *</div>
+												<div class="col-3">
+													<input th:field="*{expectedStartDate}"
+														id="expectedStartDate" class="ip-date" type="date"
+														placeholder="dd-mm-yyyy" />
+												</div>
+												<div class="col-3 title-cell">Expect end date *</div>
+												<div class="col-3">
+													<input th:field="*{expectedEndDate}" id="expectedEndDate"
+														class="ip-date" type="date" placeholder="dd-mm-yyyy">
+												</div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-3 title-cell">Location *</div>
+												<div class="col-3">
+													<select class="col-12" th:field="*{locationID}">
+														<option th:each="location : ${locations}"
+															th:text="${location.locationName}"
+															th:value="${location.locationId}"></option>
+													</select>
+												</div>
+												<div class="col-3 title-cell">Detail Location</div>
+												<div class="col-3">
+													<input th:field="*{detailLocation}" type="text">
+												</div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-3 title-cell">Budget Code *</div>
+												<div class="col-3">
+													<select class="col-12" th:field="*{budgetId}">
+														<option th:each="budget : ${budgets}"
+															th:text="${budget.budgetCode}"
+															th:value="${budget.budgetId}"></option>
+													</select>
+												</div>
+												<div class="col-3 title-cell">Estimate Budget</div>
+												<div class="col-3">
+													<input type="number" onchange="caculateTotal()"
+														id="estimateBudget" th:field="*{estimateBudget}">
+												</div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-3 title-cell">Class Admin *</div>
+												<div class="col-3">
+													<select class="select-multiple col-12" name="classAdmin[]"
+														multiple="multiple" th:field="*{classAdminIds}">
+														<option th:each="admin : ${classAdmins}"
+															th:text="${admin.fullName}" th:value="${admin.id}">
+														</option>
+													</select>
+												</div>
+												<div class="col-3 title-cell">Weighted number</div>
+												<div class="col-3">
+													<input placeholder="W-X-Y-Z" th:field="*{weightedNumber}">
+												</div>
+											</div>
+										</div>
+										<div class="col-12 p-0">
+											<div class="row row-inf">
+												<div class="col-3 title-cell">History</div>
+												<div class="col-9 title-cell"
+													th:text="${classBatch.history}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 p-0 m-2 table-cus mb-3">
+								<div class="col-12 title-table">
+									<label for="detail"><i class="bi bi-caret-down-fill"></i>Detail</label>
+									<input type="checkbox" name="detail" id="detail"
+										data-toggle="toggle">
+								</div>
+								<div class="hide">
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-2 title-cell">Subject Type</div>
+											<div class="col-2 ">
+												<select class="col-12" th:field="*{subjectTypeId}">
+													<option th:each="subjectType : ${subjectTypes}"
+														th:text="${subjectType.subjectTypeName}"
+														th:value="${subjectType.subjectTypeId}"></option>
+												</select>
+											</div>
+											<div class="col-2 title-cell">Sub-subject Type</div>
+											<div class="col-2 ">
+												<select class="col-12" th:field="*{subSubjectTypeId}">
+													<option th:each="subSubjectType : ${subSubjectTypes}"
+														th:text="${subSubjectType.subSubjectTypeName}"
+														th:value="${subSubjectType.subSubjectTypeId}"></option>
+												</select>
+											</div>
+											<div class="col-2 title-cell">Delivery Type</div>
+											<div class="col-2">
+												<select class="col-12" th:field="*{deliveryTypeId}">
+													<option th:each="deliveryType : ${deliveryTypes}"
+														th:text="${deliveryType.name}"
+														th:value="${deliveryType.id}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-2 title-cell">Format type</div>
+											<div class="col-2">
+												<select class="col-12" th:field="*{formatTypeId}">
+													<option th:each="formatType : ${formatTypes}"
+														th:text="${formatType.formatTypeName}"
+														th:value="${formatType.formatTypeId}"></option>
+												</select>
+											</div>
+											<div class="col-2 title-cell">Scope</div>
+											<div class="col-2">
+												<select class="col-12" th:field="*{scopeId}">
+													<option th:each="scope : ${scopes}"
+														th:text="${scope.scopeName}" th:value="${scope.scopeId}"></option>
+												</select>
+											</div>
+											<div class="col-2 title-cell">Supplier/Partner</div>
+											<div class="col-2">
+												<select class="col-12" th:field="*{supplierOrPartnerId}">
+													<option th:each="supplier : ${supplierPartners}"
+														th:text="${supplier.suppliesPartnerName}"
+														th:value="${supplier.suppliesPartnerId}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Actual start date</div>
+											<div class="col-3 title-cell"></div>
+											<div class="col-3 title-cell">Actual end date</div>
+											<div class="col-3 title-cell"></div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Master trainer</div>
+											<div class="col-3">
+												<select class=" col-12" name="trainer"
+													th:field="*{masterTrainerId}">
+													<option th:each="trainer : ${trainers}"
+														th:text="${trainer.fullName}"
+														th:value="${trainer.trainerProfileId}"></option>
+												</select>
+											</div>
+											<div class="col-3 title-cell">Trainer</div>
+											<div class="col-3">
+												<select class="select-multiple col-12"
+													th:field="*{listOfTrainerId}" name="trainer[]"
+													multiple="multiple">
+													<option th:each="trainer : ${trainers}"
+														th:text="${trainer.fullName}"
+														th:value="${trainer.trainerProfileId}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 p-0">
+										<div class="row row-inf">
+											<div class="col-3 title-cell">Curriculumn</div>
+											<div class="col-3">
+												<input type="file" th:field="*{curriculum}">
+											</div>
+											<div class="col-3 title-cell">Remarks</div>
+											<div class="col-3">
+												<input th:field="*{remarks}">
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row m-2">
+										<table class="table icon-table tableAdd">
+											<thead class="labels">
+												<tr>
+													<th colspan="9" style="background-color: lightskyblue;">
+														<label for="budget"><i
+															class="bi bi-caret-down-fill"></i>Budget</label> <input
+														type="checkbox" name="budget" id="budget"
+														data-toggle="toggle">
+													</th>
+												</tr>
+											</thead>
+											<tbody class="hide">
+												<tr>
+													<th class="title" colspan="3">Total</th>
+													<td colspan="2"><input class="total" id="total"
+														name="total" th:value="${classBatch.totalBudget}" disabled></td>
+													<th class="title" colspan="2">Over Budget</th>
+													<td colspan="2"><input class="overBudget"
+														id="overBudget" name="overBudget" disabled value="NO">
+														<p id="errorOverBudget" style="color: red;"></p></td>
+												</tr>
+												<tr>
+													<th style="width: 3.5%;">
+														<button class="btn" onclick="addNewBudget(this)"
+															type="button" id="addBudget">
+															<i class="bi bi-plus-circle-fill "
+																style="color: skyblue;"></i>
+														</button>
+													</th>
+													<th style="width: 12.06%;" class="title">Item</th>
+													<th style="width: 12.06%;" class="title">Unit</th>
+													<th style="width: 12.06%;" class="title">Unit Expense</th>
+													<th style="width: 12.06%;" class="title">Quantity</th>
+													<th style="width: 12.06%;" class="title">Amount</th>
+													<th style="width: 12.06%;" class="title">Tax</th>
+													<th style="width: 12.06%;" class="title">Sum</th>
+													<th style="width: 12.06%;" class="title">Note</th>
+												</tr>
+												<tr class="budget-data trData"
+													th:each="budget,iStat  : ${classBatch.budgetDetailDtos}">
+													<td hidden=true><input name="row_index"
+														th:value="${__iStat.index__}" type="text"> <input
+														th:field="*{budgetDetailDtos[__${iStat.index}__].classId}">
+														<input
+														th:field="*{budgetDetailDtos[__${iStat.index}__].id}">
+													</td>
+													<td>
+														<button class="btn deleteBtn" type="button"
+															onclick="deleteRow(this)">
+															<i class="bi bi-trash3-fill" style="color: red;"></i>
+														</button>
+													</td>
+													<td><input
+														th:field="*{budgetDetailDtos[__${iStat.index}__].item}"
+														class="requiredData">
+														<p class="error"></p></td>
+													<td><input
+														th:field="*{budgetDetailDtos[__${iStat.index}__].unit}">
+														<p class="error"></p></td>
+													<td><input class="unitExpense requiredData"
+														type="number" onchange="caculateAmountBudget(this)"
+														th:field="*{budgetDetailDtos[__${iStat.index}__].unitExpense}">
+														<p class="error"></p></td>
+													<td><input class="quantity requiredData"
+														onchange="caculateAmountBudget(this)" type="number"
+														th:field="*{budgetDetailDtos[__${iStat.index}__].quantity}">
+														<p class="error"></p></td>
+													<td><input class="amount requiredData"
+														onchange="caculateSumBudget(this)"
+														th:field="*{budgetDetailDtos[__${iStat.index}__].amount}"
+														readonly></td>
+													<td><input class="tax"
+														onchange="caculateSumBudget(this)" type="number"
+														th:field="*{budgetDetailDtos[__${iStat.index}__].tax}">
+														<p class="error"></p></td>
+													<td><input class="sum requiredData"
+														onchange="caculateTotal()"
+														th:field="*{budgetDetailDtos[__${iStat.index}__].sum}"
+														readonly></td>
+													<td><input
+														th:field="*{budgetDetailDtos[__${iStat.index}__].note}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<div class="row m-2">
+										<table class="table icon-table tableAdd">
+											<thead class="labels">
+												<tr>
+													<th colspan="9" style="background-color: lightskyblue;"><label
+														for="audit"><i class="bi bi-caret-down-fill"></i>Audit</label>
+														<input type="checkbox" name="audit" id="audit"
+														data-toggle="toggle"></th>
+												</tr>
+											</thead>
+											<tbody class="hide">
+												<tr>
+													<th style="width: 3.5%;">
+														<button class="btn" onclick="addNewAudit(this)"
+															type="button" id="addAudit">
+															<i class="bi bi-plus-circle-fill" style="color: skyblue;"></i>
+														</button>
+													</th>
+													<th style="width: 12.06%;" class="title">Date</th>
+													<th style="width: 12.06%;" class="title">Event
+														Category</th>
+													<th style="width: 12.06%;" class="title">Related
+														People</th>
+													<th style="width: 12.06%;" class="title">Action</th>
+													<th style="width: 12.06%;" class="title">PIC</th>
+													<th style="width: 12.06%;" class="title">Deadline</th>
+													<th style="width: 12.06%;" class="title">Note</th>
+												</tr>
+												<tr hidden="true">
+													<td>
+														<select hidden="true" class="col-12 select-eventCategory">
+															<option th:each="eventCategory : ${eventCateogries}"
+																th:text="${eventCategory.name}"
+																th:value="${eventCategory.id}"></option>
+														</select>
+													</td>
+												</tr>
+												<tr class="trData audit-data"
+													th:each="audit, iStat : ${classBatch.auditDtos}">
+													<td hidden><input name="row_index" value="0"
+														type="text"></td>
+													<td>
+														<button class="btn deleteBtn" type="button"
+															onclick="deleteRow(this)" id="deleteBtn">
+															<i class="bi bi-trash3-fill" style="color: red;"></i>
+														</button>
+														<input hidden="true" th:field=*{auditDtos[__${iStat.index}__].auditId}>
+													</td>
+													<td><input id="date" class="form-control requiredData"
+														type="date"
+														th:field="*{auditDtos[__${iStat.index}__].date}"
+														placeholder=" / / " />
+														<p class="error"></p></td>
+													<td><select class="col-12 select-eventCategory"
+														th:field="*{auditDtos[__${iStat.index}__].eventCategoryId}">
+															<option th:each="eventCategory : ${eventCateogries}"
+																th:text="${eventCategory.name}"
+																th:value="${eventCategory.id}"></option>
+													</select></td>
+													<td><input
+														th:field="*{auditDtos[__${iStat.index}__].relatedPartyOrPeople}"></td>
+													<td><input
+														th:field="*{auditDtos[__${iStat.index}__].action}"
+														class="requiredData">
+														<p class="error"></p></td>
+													<td><input
+														th:field="*{auditDtos[__${iStat.index}__].pic}"
+														class="requiredData">
+														<p class="error"></p></td>
+													<td><input id="date" class="form-control requiredData"
+														type="date"
+														th:field="*{auditDtos[__${iStat.index}__].deadline}"
+														placeholder=" / / " />
+														<p class="error"></p></td>
+													<td><input
+														th:field="*{auditDtos[__${iStat.index}__].note}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="mb-2">
+										<button type="submit" class="btn btn-primary btn-md ml-2">
+											Submit</button>
+										<a href="" class="btn btn-outline-secondary btn-md ml-2"><i
+											class="bi bi-reply-fill " style="color: red;"></i> Close</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="trainee" role="tabpanel"
+							aria-labelledby="trainee-tab"></div>
+					</div>
+
+					<div class="modal fade" id="confirmModal" tabindex="-1"
+						aria-labelledby="confirmModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<label class="modal-title" id="confirmModalLabel">Confirm</label>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body m-auto">
+									<div class="row">
+										<label> <i class="bi bi-question-circle-fill"
+											style="color: green;"></i> Are you sure to submit?
+										</label>
+									</div>
+									<div class="row">
+										<button type="submit" id="btn-ok"
+											class="btn btn-outline-secondary ml-2">OK</button>
+										<button type="button" id="btn-cancel"
+											class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+								<div class="modal-footer"></div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div>
+
+
+		</div>
+	</div>
+	<input id="msg" th:value="${message}" hidden="true"></input>
+
+	<!--footer-->
+
+	<div th:include="fragments/footer :: .footer"></div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+	<script
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+	<script type="text/javascript" th:src="@{/static/js/tab.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/edit-class.js}"></script>
+
+</body>
+
+</html>

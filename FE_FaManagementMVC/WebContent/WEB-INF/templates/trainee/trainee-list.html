@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+	<title>Trainee list</title>
+</head>
+<style>
+	select {
+		border-radius: 4px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+
+	#page {
+		margin-left: 100px;
+	}
+</style>
+
+<body>
+	<div th:include="fragments/header :: .header"></div>
+	<div class="col-12">
+		<div class="row">
+			<div th:include="fragments/menu_left :: .menu-left"></div>
+			<div class="col">
+				<div class="row m-auto">
+					<h4>Trainee Listing</h4>
+				</div>
+				<div class="row m-auto">
+					<table class="table table-striped " border="1" id="traineeTbl" cellspacing="0" width="100%">
+						<thead style="background-color: lightgray;">
+							<tr>
+								<th class="th-sm"><input type="checkbox" /></th>
+								<th class="th-sm">#</th>
+								<th class="th-sm">Empl ID</th>
+								<th class="sorting_asc">Account</th>
+								<th class="th-sm">Name</th>
+								<th class="th-sm">Status <a href="#" style="color: black; text-align: right;"><i
+											class="bi bi-funnel-fill "></i></a>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="trainee,isStart : ${trainees.content}">
+
+								<td><input type="checkbox" name="trainee" th:value="${trainee.id}" id=" "></td>
+								<td th:text="${isStart.index + 1}"></td>
+								<td><a th:href="@{/trainee/trainee-infor(account=${trainee.account})}"
+										th:text="${trainee.id}"></a></td>
+								<td th:text="${trainee.fullName}"></td>
+								<td th:text="${trainee.account}"></td>
+								<td th:text="${trainee.status}"></td>
+								<input type="hidden" id="trainee-type" th:value="${trainee.type}">
+							</tr>
+						</tbody>
+					</table>
+					<div class="row ml-sm-1 mb-0" th:each="trainee : ${trainees}">
+						<div class="dataTable_length" id="length">
+							<label>Page size</label> <select id="pageSize" class="ml-2 length">
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+							</select>
+						</div>
+						<div class="dataTables_info ml-lg-5 pl-lg-3" id="info" aria-live="polite"
+							th:text="'Showing '+  ${trainee.numberOfElements}  +' of ' +${trainee.totalElements} + ' entities '">
+						</div>
+						<div class="dataTable_page" id="page">
+							<select class="ml-2 page">
+								<option th:each="i: ${#numbers.sequence(0, trainee.totalPages - 1)}"
+									th:text="${i+1}+'/'+${trainee.totalPages}"></option>
+							</select>
+						</div>
+					</div>
+					<nav aria-label="Page navigation example" class="ml-auto">
+						<ul class="pagination">
+							<li class="page-item"
+								th:each="i: ${#numbers.sequence(0, trainees.totalPages - 1)}"><button
+									class="page-link" style="color: black;" th:text="${i+1}"
+									th:attr="onclick=|page(this,${i})|"></button></li>
+							<li class="page-item"
+								th:attr="onclick=|page(this,${trainees.number + 1})|">
+								<button class="page-link" style="color: black;">>></button>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<div class="row ml-sm-1 mt-0">
+					<a href="" class="btn btn-outline-primary btn-sm"><i class="bi bi-arrow-up-circle-fill "></i> UpdateTrainee</a> 
+					<button onclick="deleteTrainees()" class="btn btn-outline-danger btn-sm ml-2"><i class="bi bi-x-circle-fill"></i> Delete Trainee</button>
+				</div>
+
+				<!--Confirm modal-->
+				<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<label class="modal-title" id="confirmModalLabel">Confirm</label>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body m-auto">
+							<div class="row">
+								<label id="modal-title"> <i class="bi bi-question-circle-fill"
+										style="color: green;"></i>
+									Are you sure to request?
+								</label>
+							</div>
+							<div class="row">
+								<button type="submit" id="btn-ok" class="btn btn-outline-secondary ml-2"
+									data-dismiss="modal">OK</button>
+								<button type="button" id="btn-cancel" class="btn btn-outline-secondary ml-2"
+									data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+			<!--/Confirm modal-->
+			</div>
+		</div>
+	</div>
+	<div th:include="fragments/footer :: .footer"></div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/static/js/trainee-profile.js}"></script>
+</body>
+
+</html>

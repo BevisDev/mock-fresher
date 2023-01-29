@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Candidate Profile</title>
+<!-- jQuery library -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+<!-- icon -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" th:href="@{/css/create_candidate_profile.css}" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+</head>
+<body>
+	<div th:include="fragments/header :: .header"></div>
+	<div class="col-12">
+		<div class="row">
+			<div th:include="fragments/menu_left :: .menu-left"></div>
+			<div class="col-10">
+				<h4 class="my-3">Candidate Profile</h4>
+				<ul class="nav nav-tabs pl-4" role="tablist">
+					<li class="nav-item">
+						<button id="tab-infor" class="nav-link active" data-toggle="tab"
+							role="tab" href="#pane-tab-infor" aria-selected="true">
+							Candidate Information</button>
+					</li>
+					<li class="nav-item">
+						<button id="tab-result" class="nav-link" data-toggle="tab"
+							role="tab" href="#pane-tab-result" aria-selected="false">
+							Result</button>
+					</li>
+				</ul>
+				<div class="tab-content p-3 mb-3">
+					<div class="tab-pane fade show active" id="pane-tab-infor"
+						role="tabpanel" aria-labelledby="tab-infor">
+						<form>
+							<div class="col-12 p-0 table-cus mb-3">
+								<div class="col-12 title">Personal Information</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Empl ID</div>
+										<div class="col-2 final-cell" th:text="${candidate.id}"></div>
+										<div class="col-2 title-cell">Type</div>
+										<div class="col-2 final-cell" th:text="${trainee.type}"></div>
+										<div class="col-2 title-cell">Status</div>
+										<div class="col-2 final-cell" th:text="${candidate.status}"></div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Application Date</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell" readonly
+												th:value="${candidate.applicationDate}" />
+										</div>
+										<div class="col-2 title-cell">Channel *</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${channel.name}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Site</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${location.locationName}" readonly />
+										</div>
+										<div class="col-2 title-cell">Account</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.account}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Name *</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.fullName}" readonly />
+										</div>
+										<div class="col-2 title-cell">Gender *</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.gender}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">DOB *</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.dateOfBirth}" readonly />
+										</div>
+										<div class="col-2 title-cell">CV</div>
+										<div class="col-4 final-cell">
+											<div class="col-1 p-0">
+												<i th:if="${trainee.CV != null}" class="fa fa-file-word-o"
+													style="font-size: 25px"></i>
+											</div>
+											<div class="col-4" th:text="${trainee.getCV()}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">University</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${university.name}" readonly />
+										</div>
+										<div class="col-2 title-cell">Faculty</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${faculty.name}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Phone *</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.phone}" readonly />
+										</div>
+										<div class="col-2 title-cell">Email *</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.email}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Skill</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.skill}" readonly />
+										</div>
+										<div class="col-2 title-cell">Graduation Year</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.graduationYear}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Foreign Language</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.foreignLanguage}" readonly />
+										</div>
+										<div class="col-2 title-cell">Level</div>
+										<div class="col-4 final-cell">
+											<input type="text" class="ip-custom final-cell"
+												th:value="${trainee.level}" readonly />
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">Note</div>
+										<div class="col-10 final-cell">
+											<textarea class="ta-custom final-cell" rows="1" readonly
+												th:text="${candidate.remarks}"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 p-0">
+									<div class="row row-inf">
+										<div class="col-2 title-cell">History</div>
+										<div class="col-10 final-cell" th:text=${candidate.history}></div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="tab-pane fade" id="pane-tab-result" role="tabpanel"
+						aria-labelledby="tab-result">
+						<form action="">
+							<div class="col-12 p-0 table-cus mb-4">
+								<div class="col-12 title">Entry Test</div>
+								<table class="table ">
+									<thead>
+										<tr style="background-color: rgb(207, 207, 207);">
+											<th scope="col">Time</th>
+											<th scope="col">Date</th>
+											<th scope="col">Language Valuator</th>
+											<th scope="col">Language Point</th>
+											<th scope="col">Technical Valuator</th>
+											<th scope="col">Technical Point</th>
+											<th scope="col">Result</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="entry : ${entryTests}" class="final-cell">
+											<td th:text="${entry.time}"></td>
+											<td th:text="${entry.date}"></td>
+											<td th:text="${entry.languageValuator}"></td>
+											<td th:text="${entry.languageResult}"></td>
+											<td th:text="${entry.technicalValuator}"></td>
+											<td th:text="${entry.technicalResult}"></td>
+											<td th:text="${entry.resultEntry}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-12 p-0 table-cus mb-3">
+								<div class="col-12 title">Interview</div>
+								<table class="table ">
+									<thead>
+										<tr style="background-color: rgb(207, 207, 207);">
+											<th scope="col">Time</th>
+											<th scope="col">Date</th>
+											<th scope="col">Interviewer</th>
+											<th scope="col">Comment</th>
+											<th scope="col">Result</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="inter : ${interviews}" class="final-cell">
+											<td th:text="${inter.time}"></td>
+											<td th:text="${inter.date}"></td>
+											<td th:text="${inter.interviewer}"></td>
+											<td th:text="${inter.comment}"></td>
+											<td th:text="${inter.result}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</form>
+					</div>
+					<div class="col-12">
+						<div class="row">
+							<a th:href="@{/candidate/update?id=} + ${candidate.id}">
+								<button type="button" class="btn btn-outline-secondary mr-3">
+									<i class="fa fa-arrow-circle-up font-weight-bold"
+										style="color: rgb(70, 159, 219)"></i> Update Candidate
+								</button>
+							</a>
+							<button type="button" class="btn btn-outline-secondary mr-3"
+								data-toggle="modal" data-target="#confirmModal">
+								<i class="fa fa-close font-weight-bold" style="color: red"></i>
+								Delete Candidate
+							</button>
+							<button type="button" class="btn btn-outline-secondary"
+								data-toggle="modal" data-target="#transferModal">
+								<i class="fa fa-arrow-up font-weight-bold"
+									style="color: rgb(70, 159, 219)"></i> <i
+									class="fa fa-arrow-down font-weight-bold"
+									style="color: rgb(70, 159, 219)"></i> Transfer Candidate
+							</button>
+							<p th:text="${invalid}" style="color: red;"></p>
+						</div>
+					</div>
+					<div class="modal fade" id="confirmModal" tabindex="-1"
+						aria-labelledby="confirmModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<label class="modal-title" id="confirmModalLabel">Confirm</label>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body m-auto">
+									<div class="row">
+										<label> <i class="bi bi-question-circle-fill"
+											style="color: green;"></i> Are you sure to delete?
+										</label>
+									</div>
+									<div class="row">
+										<button type="button" id="btn-ok"
+											class="btn btn-outline-secondary ml-2"
+											th:attr="onclick=|clickOKDelete(${candidate.id})|">OK</button>
+										<button type="button" id="btn-cancel"
+											class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+								<div class="modal-footer"></div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="transferModal" tabindex="-1"
+						aria-labelledby="confirmModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<label class="modal-title" id="confirmModalLabel">Transfer</label>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body m-auto">
+									<div class="row mb-3">
+										<div class="col-6">Transfer to</div>
+										<div class="col-6">
+											<select id="transfer">
+												<option th:each="transfer : ${transferLocations}"
+													th:value="${transfer}" th:text="${transfer}"></option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<button type="button" id="btn-ok"
+											class="btn btn-outline-secondary ml-2"
+											th:attr="onclick=|clickOKTransfer(${candidate.id})|">OK</button>
+										<button type="button" id="btn-cancel"
+											class="btn btn-outline-secondary ml-2" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+								<div class="modal-footer"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="fragments/footer :: .footer"></div>
+	<script>
+		function clickOKDelete(id) {
+			window.location.href = '/candidate/delete?id=' + id;
+		}
+
+		function clickOKTransfer(id) {
+			window.location.href = '/candidate/transfer?id=' + id
+					+ '&locationTransfer='
+					+ $("#transfer").find('option:selected').val();
+		}
+	</script>
+</body>
+</html>
